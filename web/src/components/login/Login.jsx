@@ -7,11 +7,8 @@ import {
 } from "react-router-dom";
 function Login() {
     let url = 'http://localhost:5000'
-
+    let [show, setShow] = useState()
     let history = useHistory()
-    function handleClick() {
-        history.push("/Dashboard");
-    }
     function login(event) {
         event.preventDefault();
         axios({
@@ -23,8 +20,13 @@ function Login() {
             },
             withCredentials: true
         }).then((response) => {
-            // alert(response.data.message)
-            handleClick()
+            if (response.data.status === 200) {
+                history.push("/Dashboard");
+            }
+            else {
+                history.push("/login");
+                setShow(response.data.message)
+            }
         }).catch((error) => {
             console.log(error);
         });
@@ -48,7 +50,10 @@ function Login() {
                                 </div><br />
                                 <div className="col">
                                     <button className='btn btn-primary' type="submit">Login</button>
-                                </div>
+                                </div><br/>
+                                {show?<div class="alert alert-danger" role="alert">
+                                    {show}
+                                </div>: null}
                             </div>
                         </form>
                     </div>

@@ -8,9 +8,9 @@ function Signup() {
     let url = 'http://localhost:5000'
     let [change, setChange] = useState(true)
     // let [userData, setUserData] = useState([])
+    let [show, setShow] = useState()
 
     let history = useHistory()
-
     function handleClick() {
         history.push("/login");
     }
@@ -37,9 +37,15 @@ function Signup() {
             data: newData,
             withCredentials: true
         }).then((response) => {
-            // alert(response.data.message)
-            console.log(response.data.message)
-            setChange(false)
+            if (response.data.status === 200) {
+                // history.push("/Dashboard");
+                setChange(false)
+            }
+            else {
+                history.push("/signup");
+                setShow(response.data.message)
+            }
+            // console.log(response.data.message)
         }).catch((error) => {
             console.log(error);
         });
@@ -76,9 +82,9 @@ function Signup() {
                                         </div><br />
                                         <div className="col">
                                             <button className='btn btn-primary'>Signup</button>
-                                        </div>
+                                        </div><br/>
                                         <div className="col">
-                                            <p>Already have an account
+                                            <p>Already have an account?
                                             <span onClick={handleClick}
                                                     className="text-primary ml-1" style={{ cursor: "pointer" }}>
                                                     Login
@@ -95,6 +101,9 @@ function Signup() {
                                         Login
                                     </span>
                                 </div>}
+                                {show?<div class="alert alert-danger" role="alert">
+                                    {show}
+                                </div>: null}
                         </div>
                     </div>
                 </div>
