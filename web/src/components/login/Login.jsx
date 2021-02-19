@@ -1,34 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from "axios";
 import './Login.css'
+import {
+    useHistory
+} from "react-router-dom";
 function Login() {
     let url = 'http://localhost:5000'
-    let [userData, setUserData] = useState([])
 
+    let history = useHistory()
+    function handleClick() {
+        history.push("/Dashboard");
+    }
     function login(event) {
         event.preventDefault();
-
-        let name = document.getElementById('name').value
-        let email = document.getElementById('email').value
-        let phone = document.getElementById('phone').value
-        let password = document.getElementById('password').value
-        let newData = {
-            name: name,
-            email: email,
-            password: password,
-            phone: phone
-        }
-        setUserData(previousValue => {
-            return previousValue.concat([newData]);
-        })
         axios({
             method: 'post',
-            url: url + '/signup',
-            data: newData,
+            url: url + '/login',
+            data: {
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            },
             withCredentials: true
         }).then((response) => {
             // alert(response.data.message)
-            console.log(response.data.message)
+            handleClick()
         }).catch((error) => {
             console.log(error);
         });
@@ -44,10 +40,11 @@ function Login() {
                             <div className="form-col">
                                 <div className="col">
                                     <input type="email" className="form-control"
-                                        placeholder="Email" required />
+                                        placeholder="Email" required id="email" />
                                 </div><br />
                                 <div className="col">
-                                    <input type="password" className="form-control" placeholder="Password" />
+                                    <input type="password" className="form-control"
+                                        placeholder="Password" required id="password" />
                                 </div><br />
                                 <div className="col">
                                     <button className='btn btn-primary' type="submit">Login</button>
