@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.17",
     "morgan": "^1.10.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "postmark": "^2.7.1"
   }
 }

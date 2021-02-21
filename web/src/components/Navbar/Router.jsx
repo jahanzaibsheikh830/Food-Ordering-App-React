@@ -4,15 +4,23 @@ import Home from './../home/Home.jsx'
 import Login from './../login/Login.jsx'
 import Signup from './../signup/Signup.jsx'
 import Dashboard from './../dashboard/Dashboard.jsx'
+import ForgetPw from './../forgetPw/ForgetPassS1'
+import {useGlobalState,useGlobalStateUpdate} from '../../context/globalContext'
  function RoutesConfig(){
-    return(
+    const globalState = useGlobalState()
+    const setGlobalState = useGlobalStateUpdate()
+
+return(
         <div>
             <Router>
                 <Switch>
                     <Route exact path="/" component={Home}/>
-                    <Route path="/Login" component={Login}/>
-                    <Route path="/Signup" component={Signup}/>
-                    <Route path="/Dashboard" component={Dashboard}/>
+                    <Route path="/login" component={Login}/>
+                    <Route path="/signup" component={Signup}/>
+                    <Route path="/forgetpw" component={ForgetPw}/>
+                    {globalState.loginStatus === true?
+                    <Route exact path="/dashboard" component={Dashboard}/>:
+                    <Route path="/dashboard" component={Login}/>}
                     <Route path="*" component={()=><h1>404 Page Not Found</h1>}/>
                 </Switch>
             </Router>

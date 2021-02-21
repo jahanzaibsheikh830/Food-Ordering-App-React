@@ -5,7 +5,7 @@ function Home(){
     return(
         <div>
             <Navbar/>
-            <h1 className="text-center">Welcome To Launch Break Food Ordering</h1>
+            <h1 className="text-center">Home</h1>
         </div>
     )
 }

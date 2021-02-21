@@ -65,8 +65,9 @@ app.get("/profile", (req, res, next) => {
 
     console.log(req.body)
 
-    foodUserModel.findById(req.body.jToken.id, 'name email phone createdOn ',
+    foodUserModel.findById(req.body.jToken.id, 'name email phone createdOn',
         function (err, doc) {
+            console.log( "doc",doc)
             if (!err) {
                 res.send({
                     status: 200,
