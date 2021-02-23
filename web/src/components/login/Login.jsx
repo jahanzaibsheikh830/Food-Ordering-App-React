@@ -24,7 +24,6 @@ function Login() {
             withCredentials: true
         }).then((response) => {
             if (response.data.status === 200) {
-                console.log(response.data.user.isActive)
                 setGlobalState(prev =>({
                     ...prev,
                     loginStatus: true,
