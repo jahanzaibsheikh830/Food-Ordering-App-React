@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
+import Product from './cart/Product'
 import Cart from './cart/Cart'
 import {
     useHistory
@@ -47,6 +48,7 @@ function Dashboard(prpos) {
                     <h2>{globalState.user.email}</h2>
                     <h2>{globalState.user.phone}</h2>
                 </div> : null}
+            <Product />
             <Cart />
         </div>
     )
